@@ -17,7 +17,7 @@ spec:
           image: abhid92/ekart:latest # Image that will be used to containers in the cluster
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8070 # The port that the container is running on in the cluster
+            - containerPort: 6443 # The port that the container is running on in the cluster
 
 
 ---
@@ -31,6 +31,6 @@ spec:
     app: ekart
   ports:
     - protocol: "TCP"
-      port: 8070 # The port that the service is running on in the cluster
-      targetPort: 8070 # The port exposed by the service
+      port: 6443 # The port that the service is running on in the cluster
+      targetPort: 6443 # The port exposed by the service
   type: LoadBalancer # type of the service.
