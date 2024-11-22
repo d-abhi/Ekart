@@ -82,18 +82,17 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker ') {
                         sh "docker push abhid92/ekart:latest"
-                 }
-            }
+                    }
+                }
+                   }
         }
-		
-		}
-        
-        stage('kubernetes Deploy') {
+        	
+        	stage('Kubernetes Deploy') {
             steps {
-               withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.56.41:6443') {
-                 sh "kubectl apply -f deploymentservice.yml -n webapps"
-                 sh "kubectl get svc -n webapps"
-               }
+               withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.56.44:6443') {
+                sh "kubectl apply -f deploymentservice.yml -n webapps"
+                sh "kubectl get svc -n webapps"
+              }
             }
         }
         
@@ -104,6 +103,3 @@ pipeline {
       }
    
       
-
-
-
